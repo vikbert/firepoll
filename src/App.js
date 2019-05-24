@@ -1,13 +1,25 @@
 import React from "react";
+import {Route, Switch} from 'react-router-dom';
+
 import "./App.css";
-import BarChart from "./components/BarChart";
-import VoteGroup from "./components/VoteGroup";
+import VotePage from "./components/VotePage";
+import ChartPage from "./components/ChartPage";
+import HomePage from "./components/HomePage";
+import PageNotFound from "./components/PageNotFound";
+import NavHeader from "./components/NavHeader";
 
 function App() {
   return (
     <div className="App">
-      <BarChart />
-      <VoteGroup />
+      <NavHeader/>
+      <Switch>
+        <Route exact path={'/'} component={HomePage}></Route>
+        <Route path={'/vote'} component={VotePage}></Route>
+        <Route path={'/chart'} component={ChartPage}></Route>
+        <Route component={PageNotFound}></Route>
+      </Switch>
+      {/*<BarChart />*/}
+      {/*<VoteGroup />*/}
     </div>
   );
 }
