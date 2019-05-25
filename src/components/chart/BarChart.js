@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import BarGroup from "./BarGroup";
-import { base } from "../firebase/base";
-import * as Storage from "../firebase/base";
+import { base } from "../../firebase/base";
+import * as Storage from "../../firebase/base";
 
 export default class BarChart extends Component {
   state = {

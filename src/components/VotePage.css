@@ -1,0 +1,33 @@
+.option-item {
+    cursor: pointer;
+    margin: 20px 0;
+    border: 1px solid grey;
+    padding: 15px 8px;
+}
+
+.option-item:hover {
+    background-color: #e6f4f6;
+}
+.option-item.active {
+    background-color: #44c767;
+    color: #ffffff;
+}
+.icon-selected {
+    color: #ffffff;
+    padding-right: 8px;
+}
+.icon-selected:hover {
+    color: #e6f4f6;
+}
+.warning {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #e08800;
+    background-color: orange;
+}
+.info {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #bcb23e;
+    background-color: #d9e027;
+}

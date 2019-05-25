@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import './HomePage.css';
 import AnswerOption from "./AnswerOption";
+import {base, endpoints} from "../firebase/base";
 
 class HomePage extends Component {
   state = {
+    questionKey: undefined,
     question: {
       id: Date.now(),
       text: '',
@@ -52,17 +54,31 @@ class HomePage extends Component {
     this.setState({question: {...question, options}});
   };
 
+  handleSubmit = () => {
+    const {history} = this.props;
+    base.push(endpoints.questions, {
+      data: this.state.question,
+    }).then((newLocation) => {
+      const querykey = newLocation.path.pieces_[1];
+      this.setState({questionKey: querykey});
+      const newRoute = "/vote/" + querykey;
+      history.push(newRoute);
+    }).catch((error) => {
+      console.error(error);
+    });
+  };
+
   render() {
     const {optionInput, question} = this.state;
     const keys = Object.keys(question.options);
     const hasMinTwoAnswerOptions = keys.length >= 2;
     return (
       <div>
-        <h1>Home</h1>
+        <h1>Enter your new Question and its optional Answers:</h1>
         <div className="question-form">
           <div className="form-body">
             <div className="question">
-              <label htmlFor="question">Question:</label>
+              <label htmlFor="question">Question:</label><br/>
               <input
                 type="text"
                 placeholder={'enter the question'}
@@ -88,14 +104,19 @@ class HomePage extends Component {
                 onKeyPress={this.handleKeyPress}
                 value={optionInput}
               />
-              <a href="#" className="circle-plus" onClick={this.handleClickPlus}>+</a>
+              <span className="circle-plus" onClick={this.handleClickPlus}>+</span>
             </div>
           </div>
 
           <div className="form-footer">
-            {hasMinTwoAnswerOptions > 0 && <a href="#" className="submit">Submit the Question</a>}
+            {hasMinTwoAnswerOptions > 0 &&
+              <span className="submit" onClick={this.handleSubmit}>Submit the Question</span>
+            }
+
+            {this.state.questionKey && <h3>{this.state.questionKey}</h3>}
           </div>
         </div>
+
       </div>
     );
   }
