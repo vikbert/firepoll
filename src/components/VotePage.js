@@ -84,7 +84,7 @@ class VotePage extends Component {
           : (
             <>
               <h3>Question: {question && question.text}</h3>
-              <div className={'info'}>💁 Please choose one answer for the question:</div>
+              <div className={'info'}>💁 Please choose one to answer the give question:</div>
               {question && optionKeys.map((key, index) => (
                   <Option divName={selectedOption.optionId === key ? 'active option-item' : 'option-item'}
                           key={index}
@@ -96,6 +96,8 @@ class VotePage extends Component {
               {this.state.selectedOption &&
               <div className="form-footer">
                 <span className="submit" onClick={this.handleSubmit}>Submit the selected Answer</span>
+                <br/>
+                <div>ℹ️ share this link to get the voting from the others: <pre> {window.location.href}</pre></div>
               </div>
               }
             </>

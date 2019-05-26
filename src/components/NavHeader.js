@@ -4,9 +4,7 @@ import { NavLink } from 'react-router-dom'
 const NavHeader = () => (
   <div>
     <nav>
-      <NavLink to={'/'} exact>Home | </NavLink>
-      <NavLink to={'/vote'}>Vote | </NavLink>
-      <NavLink to={'/chart'}>Chart </NavLink>
+      <NavLink to={'/'} exact>Create a new poll </NavLink>
     </nav>
   </div>
 );

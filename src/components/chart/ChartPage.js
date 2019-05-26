@@ -72,17 +72,18 @@ class ChartPage extends Component {
 
     return (
       <div>
+        <pre>Total: {votes.length}x Votes</pre>
         <svg width="800" height="300">
           <g className="container">
             <text className="title" x="10" y="30">
-              {this.state.question.text}
+              Question: {this.state.question.text}
             </text>
             <g className="chart" transform="translate(100,60)">
               {barGroups}
             </g>
           </g>
         </svg>
-        <hr/>
+
       </div>
     );
   }
