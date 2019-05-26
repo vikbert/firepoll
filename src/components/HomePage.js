@@ -12,6 +12,7 @@ class HomePage extends Component {
       options: {},
     },
     optionInput: '',
+    invalidUserInput: false,
   };
 
   handleChangeQuestion = (e) => {
@@ -26,11 +27,19 @@ class HomePage extends Component {
   };
 
   _addAnswer = () => {
+    const {optionInput, invalidUserInput} = this.state;
+
+    if (optionInput.trim().length === 0) {
+      this.setState({optionInput: '', invalidUserInput: true});
+
+      return false;
+    }
+
     const optionkey = Date.now();
-    const {optionInput} = this.state;
+
     const question = {...this.state.question};
     question.options[optionkey] = optionInput;
-    this.setState({optionInput: '', question: question});
+    this.setState({optionInput: '', question: question, invalidUserInput: false});
   };
 
   handleClickPlus = (e) => {
@@ -40,7 +49,6 @@ class HomePage extends Component {
 
   handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      console.log('key press in answer input');
       this._addAnswer();
     }
   };
@@ -55,6 +63,12 @@ class HomePage extends Component {
   };
 
   handleSubmit = () => {
+    const questionText = this.state.question.text.trim();
+    if (questionText.length === 0) {
+      this.setState({invalidUserInput: true});
+      return false;
+    }
+
     const {history} = this.props;
     base.push(endpoints.questions, {
       data: this.state.question,
@@ -78,6 +92,9 @@ class HomePage extends Component {
         <div className="question-form">
           <div className="form-body">
             <div className="question">
+              {this.state.invalidUserInput &&
+                <div className={'warning'}>Text field of question and answer should not be empty</div>
+              }
               <label htmlFor="question">Question:</label><br/>
               <input
                 type="text"
@@ -97,6 +114,9 @@ class HomePage extends Component {
                   />
                 ))}
               </ul>
+
+
+
               <input
                 type="text"
                 placeholder={'enter the optional answer'}
@@ -110,7 +130,7 @@ class HomePage extends Component {
 
           <div className="form-footer">
             {hasMinTwoAnswerOptions > 0 &&
-              <span className="submit" onClick={this.handleSubmit}>Submit the Question</span>
+            <span className="submit" onClick={this.handleSubmit}>Submit the Question</span>
             }
 
             {this.state.questionKey && <h3>{this.state.questionKey}</h3>}
