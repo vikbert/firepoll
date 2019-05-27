@@ -1,6 +1,5 @@
-body {
-  font-family: "Lato", sans-serif;
-  font-size: 16px;
+.container {
+  margin-top: 15px;
 }
 
 .title {

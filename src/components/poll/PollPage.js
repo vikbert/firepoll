@@ -123,7 +123,7 @@ class PollPage extends Component {
     const hasMinTwoAnswerOptions = keys.length >= 2;
     return (
       <div>
-        <Container maxWidth="sm" className={classes.container}>
+        <Container maxWidth="md" className={classes.container}>
           <TextField
             error={questionIsEmpty}
             label="Question:"

@@ -2,13 +2,29 @@ import React, {Component} from 'react';
 import {base, endpoints} from "../../firebase/base";
 import './VotePage.css';
 import Option from './Option';
+import Container from '@material-ui/core/Container';
+import MySnackbarContentWrapper from '../common/SnackbarContentWrapper';
+import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
+import Fab from '@material-ui/core/Fab';
+import SaveIcon from '@material-ui/icons/Save';
+import {withStyles} from '@material-ui/styles';
+
+const styles = theme => ({
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
+});
 
 class VotePage extends Component {
   state = {
     question: undefined,
     questionKey: undefined,
     isVoted: false,
+    submitError: false,
     selectedOption: {},
+    isLoading: true,
   };
 
   uuidv4() {
@@ -23,7 +39,7 @@ class VotePage extends Component {
 
     if (localStorage.getItem(slug) !== null) {
       this.setState({
-        isVoted: true,
+        submitError: false,
       });
     }
 
@@ -31,9 +47,10 @@ class VotePage extends Component {
       context: this,
       asArray: false,
     }).then(data => {
-      this.setState({question: data});
+      this.setState({question: data, isLoading: false});
     }).catch(error => {
       console.error(error);
+      this.setState({isLoading: false});
     });
   }
 
@@ -66,26 +83,50 @@ class VotePage extends Component {
       }).then(() => {
         const newRoute = "/chart/" + questionKey;
         history.push(newRoute);
-        this.setState({isVoted: true});
+        this.setState({submitError: false});
       }).catch((error) => {
         console.error(error);
       });
+    } else {
+      this.setState({submitError: true});
+      console.error('Submit current form is not allowed!');
     }
   };
 
-  render() {
-    const {question, selectedOption} = this.state;
-    const optionKeys = question && Object.keys(question.options);
+  handleCloseSnackbar = () => {
+    this.setState({submitError: false});
+  };
 
+  render() {
+    const {question, selectedOption, isLoading, submitError} = this.state;
+    const {classes} = this.props;
+    const optionKeys = question && Object.keys(question.options);
+    const shareLinkMessage = "share this link to get the voting from the others </br> " + window.location.href;
     return (
       <>
-        {this.state.isVoted
-          ? <div className={'warning'}>You might have been already voted this poll.</div>
-          : (
+        <Container className={'container'} maxWidth={'md'}>
+          {submitError && (
+            <MySnackbarContentWrapper
+              variant="error"
+              open
+              message="You might have been already voted this poll and it's not allowed to repeat the voting."
+              onClose={this.handleCloseSnackbar}
+            />
+          )}
+
+        </Container>
+        <Container className={'container'} maxWidth={'md'}>
+          {isLoading
+          && (
+            <Grid container justify="center">
+              <CircularProgress color="primary"/>
+            </Grid>
+          )}
+
+          {question && (
             <>
-              <h3>Question: {question && question.text}</h3>
-              <div className={'info'}>💁 Please choose one to answer the give question:</div>
-              {question && optionKeys.map((key, index) => (
+              <Typography variant={'subtitle1'}>Question: {question.text}</Typography>
+              {optionKeys.map((key, index) => (
                   <Option divName={selectedOption.optionId === key ? 'active option-item' : 'option-item'}
                           key={index}
                           optionId={key}
@@ -94,18 +135,24 @@ class VotePage extends Component {
                 ),
               )}
               {this.state.selectedOption &&
-              <div className="form-footer">
-                <span className="submit" onClick={this.handleSubmit}>Submit the selected Answer</span>
-                <br/>
-                <div>ℹ️ share this link to get the voting from the others: <pre> {window.location.href}</pre></div>
-              </div>
+              <Fab
+                onClick={this.handleSubmit}
+                size={'large'}
+                variant={'extended'}
+                color={'primary'}
+                arial-label={'save the selected answer'}
+              >
+                <SaveIcon className={classes.extendedIcon}></SaveIcon>
+                Submit the selected Answer
+              </Fab>
               }
             </>
-          )
-        }
+          )}
+
+        </Container>
       </>
     );
   }
 }
 
-export default VotePage;
+export default withStyles(styles)(VotePage);
