@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {base, endpoints} from "../firebase/base";
+import {base, endpoints} from "../../firebase/base";
 import Vote from "./Vote";
 
 class VoteGroup extends Component {

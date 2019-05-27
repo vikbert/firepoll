@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {base, endpoints} from "../firebase/base";
+import {base, endpoints} from "../../firebase/base";
 import './VotePage.css';
 import Option from './Option';
 

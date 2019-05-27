@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './HomePage.css';
 import AnswerOption from "./AnswerOption";
-import {base, endpoints} from "../firebase/base";
+import {base, endpoints} from "../../firebase/base";
 
 class HomePage extends Component {
   state = {
@@ -27,7 +27,7 @@ class HomePage extends Component {
   };
 
   _addAnswer = () => {
-    const {optionInput, invalidUserInput} = this.state;
+    const {optionInput} = this.state;
 
     if (optionInput.trim().length === 0) {
       this.setState({optionInput: '', invalidUserInput: true});
@@ -114,8 +114,6 @@ class HomePage extends Component {
                   />
                 ))}
               </ul>
-
-
 
               <input
                 type="text"
