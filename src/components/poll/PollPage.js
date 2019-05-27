@@ -18,9 +18,6 @@ import Fab from '@material-ui/core/Fab';
 import SaveIcon from '@material-ui/icons/Save';
 
 const styles = theme => ({
-  container: {
-    marginTop: 15,
-  },
   card: {
     marginTop: 15,
     cursor: null,
@@ -83,7 +80,7 @@ class PollPage extends Component {
     this.setState({
       optionInput: '',
       question: question,
-      optionIsEmpty: false
+      optionIsEmpty: false,
     });
   };
 
@@ -123,7 +120,7 @@ class PollPage extends Component {
     const hasMinTwoAnswerOptions = keys.length >= 2;
     return (
       <div>
-        <Container maxWidth="md" className={classes.container}>
+        <Container className={'container'} maxWidth="sm">
           <TextField
             error={questionIsEmpty}
             label="Question:"

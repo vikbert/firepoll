@@ -104,7 +104,7 @@ class VotePage extends Component {
     const shareLinkMessage = "share this link to get the voting from the others </br> " + window.location.href;
     return (
       <>
-        <Container className={'container'} maxWidth={'md'}>
+        <Container className={'container'} maxWidth={'sm'}>
           {submitError && (
             <MySnackbarContentWrapper
               variant="error"
@@ -115,7 +115,7 @@ class VotePage extends Component {
           )}
 
         </Container>
-        <Container className={'container'} maxWidth={'md'}>
+        <Container className={'container'} maxWidth={'sm'}>
           {isLoading
           && (
             <Grid container justify="center">

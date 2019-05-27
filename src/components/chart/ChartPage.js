@@ -2,6 +2,17 @@ import React, {Component} from 'react';
 import BarGroup from "./BarGroup";
 import * as Storage from "../../firebase/base";
 import {base} from "../../firebase/base";
+import Container from '@material-ui/core/Container';
+import Chip from '@material-ui/core/Chip';
+import FaceIcon from '@material-ui/icons/Face';
+import {withStyles} from '@material-ui/styles';
+import Divider from '@material-ui/core/Divider';
+
+const styles = theme => ({
+  chip: {
+    margin: theme.spacing(1),
+  },
+});
 
 class ChartPage extends Component {
 
@@ -41,6 +52,7 @@ class ChartPage extends Component {
   render() {
     const barHeight = 30;
     const {votes, question} = this.state;
+    const {classes} = this.props;
 
     const barData = {};
     if (question && question.options) {
@@ -70,9 +82,11 @@ class ChartPage extends Component {
       );
     });
 
+    const totalVotesMessage = votes.length + "x Votes";
+
     return (
-      <div>
-        <pre>Total: {votes.length}x Votes</pre>
+      <Container className={'container'} maxWidth={'sm'}>
+
         <svg width="800" height="300">
           <g className="container">
             <text className="title" x="10" y="30">
@@ -84,11 +98,18 @@ class ChartPage extends Component {
           </g>
         </svg>
 
-      </div>
+        <Divider/>
+
+        <Chip
+          icon={<FaceIcon/>}
+          label={totalVotesMessage}
+          className={classes.chip}
+        />
+      </Container>
     );
   }
 }
 
 ChartPage.propTypes = {};
 
-export default ChartPage;
+export default withStyles(styles, {withTheme: true})(ChartPage);

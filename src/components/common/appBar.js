@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import AccountIcon from '@material-ui/icons/AccountCircle';
+import Link from '@material-ui/core/Link';
 
 const styles = {
   root: {
@@ -28,7 +29,9 @@ function PollAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <AddIcon/>
+            <Link color="inherit" href="/">
+              <AddIcon/>
+            </Link>
           </IconButton>
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Create a new poll
