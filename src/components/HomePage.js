@@ -103,7 +103,7 @@ class HomePage extends Component {
               />
             </div>
             <div className="answer">
-              <label htmlFor="answer">Optional Answer:</label>
+              <label htmlFor="answer">Optional Answer(min. 2x):</label>
               <ul>
                 {keys.map((key, index) => (
                   <AnswerOption
