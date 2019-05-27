@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
-// PollAppBar with customized color
 import PollAppBar from "./components/common/appBar";
 import {createMuiTheme} from '@material-ui/core/styles';
 import {ThemeProvider} from '@material-ui/styles';
@@ -24,8 +23,8 @@ ReactDOM.render(
   <BrowserRouter>
     <ThemeProvider theme={theme}>
       <PollAppBar/>
+      <App/>
     </ThemeProvider>
-    <App/>
   </BrowserRouter>,
   document.getElementById('root'),
 );
