@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import AccountIcon from '@material-ui/icons/AccountCircle';
 import Link from '@material-ui/core/Link';
+import {NavLink} from 'react-router-dom';
 
 const styles = {
   root: {
@@ -15,6 +16,8 @@ const styles = {
   },
   grow: {
     flexGrow: 1,
+    fontFamily: 'Alfa Slab One',
+    textShadow: '0 1px 0 #5d0a6b',
   },
   menuButton: {
     marginLeft: -12,
@@ -28,13 +31,14 @@ function PollAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <Link color="inherit" href="/">
+          <nav>
+            <NavLink to={"/"} activeStyle={{color: '#ffffff'}} style={{ color: '#ffffff' }} exact>
               <AddIcon/>
-            </Link>
-          </IconButton>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            FirePoll
+            </NavLink>
+          </nav>
+
+          <Typography variant="h4" color="inherit" className={classes.grow} align={'center'}>
+            {'fp'}
           </Typography>
           <IconButton color="inherit" target="_blank" href="https://github.com/vikbert">
             <AccountIcon/>
