@@ -2,14 +2,20 @@ import React, {Component} from 'react';
 import AnswerOption from "./AnswerOption";
 import {base, endpoints} from "../../firebase/base";
 import AnswerOptionInput from "./AnswerOptionInput";
+import QuestionInput from './QuestionInput';
+
 import {withStyles} from '@material-ui/styles';
-import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import Container from '@material-ui/core/Container';
 import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: 20,
+    backgroundColor: theme.palette.background.paper,
+  },
   card: {
     marginTop: 15,
     cursor: null,
@@ -41,17 +47,13 @@ class PollPage extends Component {
     optionIsEmpty: false,
   };
 
-  handleChangeQuestion = (e) => {
-    const inputValue = e.target.value;
-    if (inputValue.length > 0) {
-      const question = {...this.state.question, text: inputValue};
+  handleChangeQuestion = (inputText) => {
+    if (inputText.length > 0) {
+      const question = {...this.state.question, text: inputText};
       this.setState({question: question, questionIsEmpty: false});
     }
-  };
 
-  handleInputBlur = (e) => {
-    const inputValue = e.target.value;
-    this.setState({questionIsEmpty: inputValue.trim().length === 0});
+    this.setState({questionIsEmpty: inputText.trim().length === 0});
   };
 
   addAnswer = (optionInput) => {
@@ -101,27 +103,13 @@ class PollPage extends Component {
   };
 
   render() {
-    const {classes} = this.props;
-    const {question, questionIsEmpty} = this.state;
+    const {question} = this.state;
     const keys = Object.keys(question.options);
     const hasMinTwoAnswerOptions = keys.length >= 2;
     return (
       <div>
         <Container className={'container'} maxWidth="sm">
-          <TextField
-            error={questionIsEmpty}
-            label="Poll Question:"
-            placeholder="Enter the question text"
-            helperText="Can not be empty"
-            fullWidth
-            multiline
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={this.handleChangeQuestion}
-            onBlur={this.handleInputBlur}
-          />
-
+          <QuestionInput handleSubmit={this.handleChangeQuestion} labelText={'Poll Question'}/>
           <AnswerOptionInput addAnswer={this.addAnswer}/>
           <List dense={false}>
             {keys.map((key, index) => (

@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import AccountIcon from '@material-ui/icons/AccountCircle';
-import Link from '@material-ui/core/Link';
 import {NavLink} from 'react-router-dom';
 
 const styles = {
@@ -32,7 +31,7 @@ function PollAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <nav>
-            <NavLink to={"/"} activeStyle={{color: '#ffffff'}} style={{ color: '#ffffff' }} exact>
+            <NavLink to={"/"} activeStyle={{color: '#ffffff'}} style={{color: '#ffffff'}} exact>
               <AddIcon/>
             </NavLink>
           </nav>

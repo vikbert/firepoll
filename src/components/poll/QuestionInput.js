@@ -5,6 +5,8 @@ import {withStyles} from '@material-ui/styles';
 import TextField from "@material-ui/core/TextField/TextField";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import CheckIcon from '@material-ui/icons/Check';
+
 import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
@@ -26,30 +28,32 @@ const styles = theme => ({
   },
 });
 
-const AnswerOptionInput = ({classes, addAnswer}) => {
-  const [optionInput, setOptionInput] = useState('');
-  const [optionIsEmpty, setOptionIsEmpty] = useState(false);
+const QuestionInput = ({classes, labelText, placeholderText, handleSubmit}) => {
+  const [textInput, setTextInput] = useState('');
+  const [isSaved, setIsSaved] = useState(false);
+  const [textInputIsEmpty, setTextInputIsEmpty] = useState(false);
 
   const handleChangeOption = (e) => {
-    const inputValue = e.target.value.trim();
-    setOptionInput(inputValue);
-    setOptionIsEmpty(false);
+    const inputValue = e.target.value;
+    setTextInput(inputValue);
+    setTextInputIsEmpty(false);
   };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      applyAddAnswer();
+      applySubmit();
     }
   };
 
-  const applyAddAnswer = () => {
-    if (optionInput.length === 0) {
-      setOptionIsEmpty(true);
+  const applySubmit = () => {
+    if (textInput.trim().length === 0) {
+      setTextInputIsEmpty(true);
+      setTextInput('');
       return;
     }
 
-    addAnswer(optionInput);
-    setOptionInput('');
+    handleSubmit(textInput);
+    setIsSaved(true);
   };
 
   return (
@@ -57,20 +61,23 @@ const AnswerOptionInput = ({classes, addAnswer}) => {
       <Grid container spacing={1}>
         <Grid item xs={9}>
           <TextField
-            label="Poll Options:"
+            label={labelText}
             fullWidth
-            error={optionIsEmpty}
-            placeholder={'Your optional answer'}
+            error={textInputIsEmpty}
+            placeholder={'Your question'}
             margin="normal"
             InputLabelProps={{shrink: true}}
-            value={optionInput}
+            value={textInput}
             onChange={handleChangeOption}
             onKeyPress={handleKeyPress}
           />
         </Grid>
         <Grid item xs={3} container alignItems={'center'} justify={'flex-end'}>
-          <Fab size={'medium'} onClick={applyAddAnswer}>
-            <AddIcon/>
+          <Fab size={'medium'} onClick={applySubmit}>
+            {isSaved
+              ? <CheckIcon color={'primary'}/>
+              : <AddIcon/>
+            }
           </Fab>
         </Grid>
       </Grid>
@@ -78,8 +85,9 @@ const AnswerOptionInput = ({classes, addAnswer}) => {
   );
 };
 
-AnswerOptionInput.propTypes = {
-  addAnswer: PropTypes.func.isRequired,
+QuestionInput.propTypes = {
+  labelText: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(AnswerOptionInput);
+export default withStyles(styles)(QuestionInput);

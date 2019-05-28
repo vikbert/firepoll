@@ -70,6 +70,7 @@ class ChartPage extends Component {
     const keys = Object.keys(barData);
     keys.map((key, index) => {
       data[index] = {option: key, votes: barData[key]};
+      return true;
     });
 
     const totalVotesMessage = votes.length + "x Votes";
