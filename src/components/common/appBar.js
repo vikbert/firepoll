@@ -34,7 +34,7 @@ function PollAppBar(props) {
             </Link>
           </IconButton>
           <Typography variant="h6" color="inherit" className={classes.grow}>
-            Create a new poll
+            FirePoll
           </Typography>
           <IconButton color="inherit" target="_blank" href="https://github.com/vikbert">
             <AccountIcon/>

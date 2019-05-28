@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
-import SaveIcon from '@material-ui/icons/Save';
 import {withStyles} from '@material-ui/styles';
 
 const styles = theme => ({
@@ -135,16 +134,17 @@ class VotePage extends Component {
                 ),
               )}
               {this.state.selectedOption &&
-              <Fab
-                onClick={this.handleSubmit}
-                size={'large'}
-                variant={'extended'}
-                color={'primary'}
-                arial-label={'save the selected answer'}
-              >
-                <SaveIcon className={classes.extendedIcon}></SaveIcon>
-                Submit the selected Answer
-              </Fab>
+              <Grid container direction={'row'} justify={'flex-end'}>
+                <Fab
+                  onClick={this.handleSubmit}
+                  size={'large'}
+                  variant={'extended'}
+                  color={'primary'}
+                  arial-label={'save the selected answer'}
+                >
+                  Submit Vote
+                </Fab>
+              </Grid>
               }
             </>
           )}

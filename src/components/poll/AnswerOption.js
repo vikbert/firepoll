@@ -4,25 +4,29 @@ import PropTypes from 'prop-types';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
-import Fab from '@material-ui/core/Fab';
-import RemoveIcon from '@material-ui/icons/Remove';
+import DeleteIcon from '@material-ui/icons/Delete';
 
-const AnswerOption = ({optionKey, optionText, removeOption}) => {
+import {withStyles} from '@material-ui/styles';
+
+const styles = theme => ({
+  optionItem: {
+    padding: 0,
+    color: 'grey',
+  },
+});
+
+const AnswerOption = ({optionKey, optionText, removeOption, classes}) => {
   const handleRemoveOption = () => {
     removeOption(optionKey);
   };
 
   return (
-    <>
-      <ListItem>
-        <ListItemAvatar>
-          <Fab size="small" aria-label="remove" color={'secondary'}>
-            <RemoveIcon onClick={handleRemoveOption}/>
-          </Fab>
-        </ListItemAvatar>
-        <ListItemText primary={optionText}/>
-      </ListItem>
-    </>
+    <ListItem disableGutters className={classes.optionItem}>
+      <ListItemAvatar style={{minWidth: 35}}>
+        <DeleteIcon onClick={handleRemoveOption}/>
+      </ListItemAvatar>
+      <ListItemText primary={optionText}/>
+    </ListItem>
   );
 };
 
@@ -32,5 +36,5 @@ AnswerOption.propTypes = {
   removeOption: PropTypes.func.isRequired,
 };
 
-export default AnswerOption;
+export default withStyles(styles)(AnswerOption);
 

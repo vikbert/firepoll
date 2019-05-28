@@ -3,19 +3,11 @@ import AnswerOption from "./AnswerOption";
 import {base, endpoints} from "../../firebase/base";
 import AnswerOptionInput from "./AnswerOptionInput";
 import {withStyles} from '@material-ui/styles';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import Radio from '@material-ui/core/Radio';
-import FormControl from '@material-ui/core/FormControl';
 import List from '@material-ui/core/List';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Container from '@material-ui/core/Container';
 import Fab from '@material-ui/core/Fab';
-import SaveIcon from '@material-ui/icons/Save';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   card: {
@@ -33,11 +25,6 @@ const styles = theme => ({
   },
   extendedIcon: {
     marginRight: theme.spacing(1),
-  },
-  floatingFab: {
-    position: 'absolute',
-    bottom: theme.spacing(5),
-    right: theme.spacing(5),
   },
 });
 
@@ -123,13 +110,11 @@ class PollPage extends Component {
         <Container className={'container'} maxWidth="sm">
           <TextField
             error={questionIsEmpty}
-            label="Question:"
-            style={{margin: 8}}
+            label="Poll Question:"
             placeholder="Enter the question text"
             helperText="Can not be empty"
             fullWidth
             multiline
-            margin="normal"
             InputLabelProps={{
               shrink: true,
             }}
@@ -150,46 +135,20 @@ class PollPage extends Component {
           </List>
 
           {hasMinTwoAnswerOptions > 0 &&
-          <Fab
-            size={'large'}
-            variant="extended"
-            className={classes.floatingFab}
-            color={"primary"}
-            aria-label="save the question"
-            onClick={this.handleSubmit}
-          >
-            <SaveIcon className={classes.extendedIcon}/>
-            {'submit this poll'}
-          </Fab>
+          <Grid container direction={'row'} justify={'flex-end'} alignItems={'center'}>
+            <Fab
+              size={'large'}
+              variant={'extended'}
+              color={"primary"}
+              aria-label="save the question"
+              onClick={this.handleSubmit}
+            >
+              Submit Poll
+            </Fab>
+          </Grid>
           }
-
           {this.state.questionKey && <h3>{this.state.questionKey}</h3>}
         </Container>
-        {question.text !== '' && (
-          <Container className={'question-preview'} maxWidth="sm">
-            <Card className={classes.card}>
-              <CardMedia className={classes.media} src="#">PREVIEW</CardMedia>
-              <CardContent>
-                <Typography variant={'h6'} gutterBottom display={'block'}>
-                  {question.text}
-                </Typography>
-                {keys.length > 0 && (
-                  <FormControl component="fieldset" className={classes.formControl}>
-                    <RadioGroup
-                      aria-label="answer-option"
-                      name="answer-option"
-                      className={classes.group}
-                    >
-                      {keys.map((key, index) => (
-                        <FormControlLabel key={index} value={key} control={<Radio/>} label={question.options[key]}/>
-                      ))}
-                    </RadioGroup>
-                  </FormControl>
-                )}
-              </CardContent>
-            </Card>
-          </Container>
-        )}
       </div>
     );
   }

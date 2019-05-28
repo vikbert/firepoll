@@ -32,10 +32,8 @@ const AnswerOptionInput = ({classes, addAnswer}) => {
 
   const handleChangeOption = (e) => {
     const inputValue = e.target.value.trim();
-    if (inputValue.length > 0) {
-      setOptionInput(inputValue);
-      setOptionIsEmpty(false);
-    }
+    setOptionInput(inputValue);
+    setOptionIsEmpty(false);
   };
 
   const handleKeyPress = (e) => {
@@ -56,11 +54,10 @@ const AnswerOptionInput = ({classes, addAnswer}) => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={8}>
+      <Grid container spacing={1}>
+        <Grid item xs={9}>
           <TextField
-            label="Option:"
-            style={{margin: 8}}
+            label="Poll Options:"
             fullWidth
             error={optionIsEmpty}
             placeholder="the optional answer"
@@ -72,8 +69,8 @@ const AnswerOptionInput = ({classes, addAnswer}) => {
             onKeyPress={handleKeyPress}
           />
         </Grid>
-        <Grid item xs={4}>
-          <Fab color={'primary'} size={'medium'} onClick={applyAddAnswer}>
+        <Grid item xs={3} container alignItems={'center'} justify={'flex-end'}>
+          <Fab size={'medium'} onClick={applyAddAnswer}>
             <AddIcon/>
           </Fab>
         </Grid>
