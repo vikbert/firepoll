@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import BarGroup from "./BarGroup";
 import * as Storage from "../../firebase/base";
 import {base} from "../../firebase/base";
 import Container from '@material-ui/core/Container';
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import {withStyles} from '@material-ui/styles';
-import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+import {Axis, Chart, Coord, Geom, Tooltip} from 'bizcharts';
 
 const styles = theme => ({
   chip: {
@@ -15,7 +15,6 @@ const styles = theme => ({
 });
 
 class ChartPage extends Component {
-
   state = {
     questionKey: undefined,
     votes: {},
@@ -26,8 +25,6 @@ class ChartPage extends Component {
     const slug = this.props.match.params.slug;
     this.setState({questionKey: slug});
 
-    const questionEndpoint = `${Storage.endpoints.questions}/${slug}`;
-    console.log(questionEndpoint);
     base.fetch(`${Storage.endpoints.questions}/${slug}`, {
       context: this,
       asArray: false,
@@ -50,7 +47,6 @@ class ChartPage extends Component {
   }
 
   render() {
-    const barHeight = 30;
     const {votes, question} = this.state;
     const {classes} = this.props;
 
@@ -70,46 +66,36 @@ class ChartPage extends Component {
       });
     }
 
-    const optionNames = Object.keys(barData);
-
-    const barGroups = optionNames.map((name, index) => {
-      const itemName = name;
-      const itemCounter = barData[name];
-      return (
-        <g key={name} transform={`translate(0, ${index * barHeight})`}>
-          <BarGroup barHeight={barHeight} count={itemCounter} name={itemName}/>
-        </g>
-      );
+    let data = [];
+    const keys = Object.keys(barData);
+    keys.map((key, index) => {
+      data[index] = {option: key, votes: barData[key]};
     });
 
     const totalVotesMessage = votes.length + "x Votes";
 
     return (
       <Container className={'container'} maxWidth={'sm'}>
-
-        <svg width="800" height="300">
-          <g className="container">
-            <text className="title" x="10" y="30">
-              Question: {this.state.question.text}
-            </text>
-            <g className="chart" transform="translate(100,60)">
-              {barGroups}
-            </g>
-          </g>
-        </svg>
-
-        <Divider/>
+        <Typography style={{color: 'grey'}}>
+          {this.state.question.text}
+        </Typography>
 
         <Chip
           icon={<FaceIcon/>}
           label={totalVotesMessage}
           className={classes.chip}
         />
+
+        <Chart height={400} data={data} forceFit>
+          <Coord transpose/>
+          <Axis name="option" label={{offset: 5}}/>
+          <Axis name="votes"/>
+          <Tooltip/>
+          <Geom type="interval" position="option*votes" color={'#9c27b0'}/>
+        </Chart>
       </Container>
     );
   }
 }
-
-ChartPage.propTypes = {};
 
 export default withStyles(styles, {withTheme: true})(ChartPage);
