@@ -92,18 +92,23 @@ class PollPage extends Component {
     return (
       <div>
         <Container className={'container'} maxWidth="sm">
-
-          <Box>
-            <Typography component={'p'} align={'center'} style={{color: '#b7b7b7', margin: '1.5em'}}>
-              Add the poll question and min. 2x poll answers, then share the URL for getting feedback.
-              Each participant is able to vote the poll just once.
-            </Typography>
-          </Box>
-          <Box display={'flex'} justifyContent={'center'}>
-            <AssignmentIcon color={'disabled'} style={{fontSize: 80, display: 'block'}}/>
-          </Box>
+          {keys.length === 0 && (
+            <>
+                <Box>
+                    <Typography component={'p'} align={'center'} style={{color: '#b7b7b7', margin: '1.5em'}}>
+                        Add the poll question and min. 2x poll answers, then share the URL for getting feedback.
+                        Each participant is able to vote the poll just once.
+                    </Typography>
+                </Box>
+          
+              <Box display={'flex'} justifyContent={'center'}>
+                <AssignmentIcon color={'disabled'} style={{fontSize: 80, display: 'block'}}/>
+              </Box>
+              </>
+          )}
 
           <QuestionInput handleSubmit={this.handleChangeQuestion} labelText={'Poll Question'}/>
+
           <AnswerOptionInput addAnswer={this.addAnswer}/>
           <List dense={false}>
             {keys.map((key, index) => (
