@@ -8,7 +8,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
 import {withStyles} from '@material-ui/styles';
-import PollTitle from "../common/PollTitle";
+import PollTitleCard from "../common/PollTitleCard";
 import InfoContainer from "../common/InfoContainer";
 
 const styles = theme => ({
@@ -134,7 +134,6 @@ class VotePage extends Component {
           )}
         </Container>
         <Container className={'container'} maxWidth={'sm'}>
-          <InfoContainer info={'Choose one question and submit your vote'}/>
           {isLoading
           && (
             <Grid container justify="center">
@@ -144,7 +143,7 @@ class VotePage extends Component {
 
           {question && (
             <>
-              <PollTitle title={question.text}/>
+              <PollTitleCard title={question.text}/>
 
               {optionKeys.map((key, index) => (
                   <OptionButton divName={selectedOption.optionId === key ? 'active option-item' : 'option-item'}
@@ -169,6 +168,7 @@ class VotePage extends Component {
               }
             </>
           )}
+          <InfoContainer info={'Choose one question and submit your vote'}/>
 
         </Container>
       </>
