@@ -1,6 +1,6 @@
 # Schwarzpoll
 A realtime voting app with react.js + redux + firebase
-
+(🔥,✔︎)
 ## Anforderung
  1. Question Form Page
  2. Vote Form page
@@ -17,11 +17,15 @@ A realtime voting app with react.js + redux + firebase
     4. user is redirected to the next page:  charts page ✔︎
    
 - customize the navigation header
-    - just have one link "create new poll(link to home)" 🔥
+    - just have one link "create new poll(link to home)" ✔︎
     
 - make the views mobile friendly
-    - question 🔥
-    - vote 🔥
-    - chart 🔥
+    - question ✔︎
+    - vote ✔︎
+    - chart ✔︎
+
+## Bugs
+- votePage: vote still possible, if no option selected 🔥
+- 
     
     
