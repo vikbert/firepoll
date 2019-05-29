@@ -6,7 +6,6 @@ import {withStyles} from '@material-ui/styles';
 const styles = () => ({
   title: {
     color: '#5d5959',
-    textShadow: '1px 0 1px #060606',
   },
 });
 

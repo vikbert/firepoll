@@ -14,15 +14,23 @@ import InfoContainer from "../common/InfoContainer";
 const styles = theme => ({
   extendedIcon: {
     marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(5),
+  },
+  submitButtonRoot: {
+    marginBottom: 10,
   },
 });
+
+const errorDoubleVoting = 'It is not allowed to repeat the voting.';
+const errorNoVoting = 'Please select one :)';
+const errorNetworking = 'Something wrong with networking!';
 
 class VotePage extends Component {
   state = {
     question: undefined,
     questionKey: undefined,
     isVoted: false,
-    submitError: false,
+    submitError: undefined,
     selectedOption: {},
     isLoading: true,
   };
@@ -39,7 +47,7 @@ class VotePage extends Component {
 
     if (localStorage.getItem(slug) !== null) {
       this.setState({
-        submitError: false,
+        submitError: errorDoubleVoting,
       });
     }
 
@@ -70,27 +78,39 @@ class VotePage extends Component {
     const {questionKey, selectedOption} = this.state;
 
     let playerId = localStorage.getItem(questionKey);
-    const isSubmitAllowed = playerId === null && Object.keys(selectedOption).length > 0;
-
-    if (isSubmitAllowed) {
-      playerId = this.uuidv4();
-      localStorage.setItem(questionKey, playerId);
-
-      const questionVotesEndpoint = `${endpoints.votes}/${questionKey}/${playerId}`;
-
-      base.post(questionVotesEndpoint, {
-        data: this.state.selectedOption,
-      }).then(() => {
-        const newRoute = "/chart/" + questionKey;
-        history.push(newRoute);
-        this.setState({submitError: false});
-      }).catch((error) => {
-        console.error(error);
+    if (playerId !== null) {
+      this.setState({
+        submitError: errorDoubleVoting,
       });
-    } else {
-      this.setState({submitError: true});
-      console.error('Submit current form is not allowed!');
+
+      return false;
     }
+
+    const noOptionSelected = Object.keys(selectedOption).length === 0;
+    if (noOptionSelected) {
+      this.setState({
+        submitError: errorNoVoting,
+      });
+
+      return false;
+    }
+
+    playerId = this.uuidv4();
+    localStorage.setItem(questionKey, playerId);
+
+    const questionVotesEndpoint = `${endpoints.votes}/${questionKey}/${playerId}`;
+    base.post(questionVotesEndpoint, {
+      data: this.state.selectedOption,
+    }).then(() => {
+      const newRoute = "/chart/" + questionKey;
+      history.push(newRoute);
+      this.setState({submitError: undefined});
+    }).catch((error) => {
+      console.error(error);
+      this.setState({
+        submitError: errorNetworking,
+      });
+    });
   };
 
   handleCloseSnackbar = () => {
@@ -99,6 +119,7 @@ class VotePage extends Component {
 
   render() {
     const {question, selectedOption, isLoading, submitError} = this.state;
+    const {classes} = this.props;
     const optionKeys = question && Object.keys(question.options);
     return (
       <>
@@ -107,11 +128,10 @@ class VotePage extends Component {
             <MySnackbarContentWrapper
               variant="error"
               open
-              message="You might have been already voted this poll and it's not allowed to repeat the voting."
+              message={submitError}
               onClose={this.handleCloseSnackbar}
             />
           )}
-
         </Container>
         <Container className={'container'} maxWidth={'sm'}>
           <InfoContainer info={'Choose one question and submit your vote'}/>
@@ -135,7 +155,7 @@ class VotePage extends Component {
                 ),
               )}
               {this.state.selectedOption &&
-              <Grid container direction={'row'} justify={'flex-end'}>
+              <Grid container direction={'row'} justify={'flex-end'} className={classes.submitButtonRoot}>
                 <Fab
                   onClick={this.handleSubmit}
                   size={'large'}
