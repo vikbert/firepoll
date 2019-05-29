@@ -116,7 +116,7 @@ class PollPage extends Component {
             ))}
           </List>
 
-          {hasMinTwoAnswerOptions > 0 && <SubmitButton submit={this.handleSubmit}/>}
+          {hasMinTwoAnswerOptions > 0 && <SubmitButton handleSubmit={this.handleSubmit}/>}
           {this.state.questionKey && <h3>{this.state.questionKey}</h3>}
         </Container>
       </div>
