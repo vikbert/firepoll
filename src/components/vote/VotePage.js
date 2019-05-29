@@ -123,7 +123,7 @@ class VotePage extends Component {
 
           {question && (
             <>
-              <Typography variant={'subtitle1'}>Question: {question.text}</Typography>
+              <Typography variant={'subtitle1'}>{question.text}</Typography>
               {optionKeys.map((key, index) => (
                   <OptionButton divName={selectedOption.optionId === key ? 'active option-item' : 'option-item'}
                                 key={index}
