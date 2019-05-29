@@ -19,7 +19,7 @@ const SubmitButton = ({classes, handleSubmit}) => {
   const matchedNormalScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
-    <div className={matchedNormalScreen ? '' : classes.root}>
+    <div>
       <Grid container direction={'row'} justify={'flex-end'} alignItems={'center'}>
         <Fab
           size={'large'}
