@@ -25,19 +25,13 @@ const styles = theme => ({
   error: {
     backgroundColor: theme.palette.error.dark,
   },
-  // info: {
-  //   backgroundColor:  '#75B05F',
-  // },
-  // warning: {
-  //   backgroundColor: amber[700],
-  // },
-  // icon: {
-  //   fontSize: 20,
-  // },
-  // iconVariant: {
-  //   opacity: 0.9,
-  //   marginRight: theme.spacing(1),
-  // },
+  icon: {
+    fontSize: 20,
+  },
+  iconVariant: {
+    opacity: 0.9,
+    marginRight: theme.spacing(1),
+  },
   message: {
     display: 'flex',
     alignItems: 'center',

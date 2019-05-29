@@ -5,8 +5,8 @@ import Container from '@material-ui/core/Container';
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import {withStyles} from '@material-ui/styles';
-import Typography from '@material-ui/core/Typography';
 import {Axis, Chart, Coord, Geom, Tooltip} from 'bizcharts';
+import PollTitle from "../common/PollTitle";
 
 const styles = theme => ({
   chip: {
@@ -29,6 +29,7 @@ class ChartPage extends Component {
       context: this,
       asArray: false,
     }).then(data => {
+      console.log('data is back');
       this.setState({question: data});
     }).catch(error => {
       console.error(error);
@@ -77,9 +78,7 @@ class ChartPage extends Component {
 
     return (
       <Container className={'container'} maxWidth={'sm'}>
-        <Typography style={{color: 'grey'}}>
-          {this.state.question.text}
-        </Typography>
+        <PollTitle title={this.state.question.text}/>
 
         <Chart height={400} data={data} forceFit>
           <Coord transpose/>

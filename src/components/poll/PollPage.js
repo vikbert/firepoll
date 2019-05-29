@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import SubmitButton from "./SubmitButton";
 
 const styles = () => ({
-  root: {}
+  root: {},
 });
 
 class PollPage extends Component {
@@ -94,17 +94,16 @@ class PollPage extends Component {
         <Container className={'container'} maxWidth="sm">
           {keys.length === 0 && (
             <>
-                <Box>
-                    <Typography component={'p'} align={'center'} style={{color: '#b7b7b7', margin: '1.5em'}}>
-                        Add the poll question and min. 2x poll answers, then share the URL for getting feedback.
-                        Each participant is able to vote the poll just once.
-                    </Typography>
-                </Box>
-          
-              <Box display={'flex'} justifyContent={'center'}>
-                <AssignmentIcon color={'disabled'} style={{fontSize: 80, display: 'block'}}/>
+              <Box>
+                <Typography component={'p'} align={'center'} style={{color: '#b7b7b7', margin: '1em'}}>
+                  Add the poll question and min. 2x poll answers, then share the URL for getting feedback.
+                </Typography>
               </Box>
-              </>
+
+              <Box display={'flex'} justifyContent={'center'}>
+                <AssignmentIcon color={'disabled'} style={{fontSize: 60, display: 'block'}}/>
+              </Box>
+            </>
           )}
 
           <QuestionInput handleSubmit={this.handleChangeQuestion} labelText={'Poll Question'}/>

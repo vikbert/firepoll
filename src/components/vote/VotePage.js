@@ -4,12 +4,11 @@ import './VotePage.css';
 import OptionButton from './OptionButton';
 import Container from '@material-ui/core/Container';
 import MySnackbarContentWrapper from '../common/SnackbarContentWrapper';
-import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
 import {withStyles} from '@material-ui/styles';
-
+import PollTitle from "../common/PollTitle";
 
 const styles = theme => ({
   extendedIcon: {
@@ -70,7 +69,7 @@ class VotePage extends Component {
     const {questionKey, selectedOption} = this.state;
 
     let playerId = localStorage.getItem(questionKey);
-    const isSubmitAllowed = playerId === null && selectedOption !== undefined;
+    const isSubmitAllowed = playerId === null && Object.keys(selectedOption).length > 0;
 
     if (isSubmitAllowed) {
       playerId = this.uuidv4();
@@ -123,7 +122,8 @@ class VotePage extends Component {
 
           {question && (
             <>
-              <Typography variant={'subtitle1'}>{question.text}</Typography>
+              <PollTitle title={question.text}/>
+
               {optionKeys.map((key, index) => (
                   <OptionButton divName={selectedOption.optionId === key ? 'active option-item' : 'option-item'}
                                 key={index}
