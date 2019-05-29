@@ -11,6 +11,7 @@ import Box from '@material-ui/core/Box';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import Typography from '@material-ui/core/Typography';
 import SubmitButton from "./SubmitButton";
+import InfoContainer from "../common/InfoContainer";
 
 const styles = () => ({
   root: {},
@@ -93,17 +94,9 @@ class PollPage extends Component {
       <div>
         <Container className={'container'} maxWidth="sm">
           {keys.length === 0 && (
-            <>
-              <Box>
-                <Typography component={'p'} align={'center'} style={{color: '#b7b7b7', margin: '1em'}}>
-                  Add the poll question and min. 2x poll answers, then share the URL for getting feedback.
-                </Typography>
-              </Box>
-
-              <Box display={'flex'} justifyContent={'center'}>
-                <AssignmentIcon color={'disabled'} style={{fontSize: 60, display: 'block'}}/>
-              </Box>
-            </>
+              <InfoContainer
+                info={'Add the poll question and min. 2x poll answers, then share the URL for getting feedback.'}
+              />
           )}
 
           <QuestionInput handleSubmit={this.handleChangeQuestion} labelText={'Poll Question'}/>

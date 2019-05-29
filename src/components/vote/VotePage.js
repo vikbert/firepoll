@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
 import {withStyles} from '@material-ui/styles';
 import PollTitle from "../common/PollTitle";
+import InfoContainer from "../common/InfoContainer";
 
 const styles = theme => ({
   extendedIcon: {
@@ -113,6 +114,7 @@ class VotePage extends Component {
 
         </Container>
         <Container className={'container'} maxWidth={'sm'}>
+          <InfoContainer info={'Choose one question and submit your vote'}/>
           {isLoading
           && (
             <Grid container justify="center">
