@@ -12,7 +12,7 @@ const styles = () => ({
 const PollTitle = props => {
   const {title, classes} = props;
   return (
-    <Typography className={classes.title} variant={'subtitle1'}>{title}</Typography>
+    <Typography className={classes.title} variant={'body1'}>{title}</Typography>
   );
 };
 

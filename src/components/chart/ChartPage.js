@@ -6,7 +6,7 @@ import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import {withStyles} from '@material-ui/styles';
 import {Axis, Chart, Coord, Geom, Tooltip} from 'bizcharts';
-import PollTitle from "../common/PollTitle";
+import PollTitleCard from "../common/PollTitleCard";
 
 const styles = theme => ({
   chip: {
@@ -76,9 +76,18 @@ class ChartPage extends Component {
 
     const totalVotesMessage = votes.length + "x Votes";
 
+    console.log(data);
+    data = [
+      {option: 'some text ist there ', votes: 30},
+      {option: 'some tex there ', votes: 3},
+      {option: 'some tex ', votes: 12},
+      {option: 'some text ist there ', votes: 20},
+    ];
+
     return (
       <Container className={'container'} maxWidth={'sm'}>
-        <PollTitle title={this.state.question.text}/>
+
+        <PollTitleCard title={question.text}/>
 
         <Chart height={400} data={data} forceFit>
           <Coord transpose/>
