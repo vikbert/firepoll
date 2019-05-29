@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Option = ({optionId, optionText, divName, selectAnswer}) => {
-
+const OptionButton = ({optionId, optionText, divName, selectAnswer}) => {
   const handleClick = () => {
     selectAnswer(optionId, optionText);
   };
@@ -19,11 +18,11 @@ const Option = ({optionId, optionText, divName, selectAnswer}) => {
   );
 };
 
-Option.propTypes = {
+OptionButton.propTypes = {
   optionId: PropTypes.string.isRequired,
   optionText: PropTypes.string.isRequired,
   divName: PropTypes.string.isRequired,
   selectAnswer: PropTypes.func.isRequired,
 };
 
-export default Option;
+export default OptionButton;

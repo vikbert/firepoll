@@ -81,12 +81,6 @@ class ChartPage extends Component {
           {this.state.question.text}
         </Typography>
 
-        <Chip
-          icon={<FaceIcon/>}
-          label={totalVotesMessage}
-          className={classes.chip}
-        />
-
         <Chart height={400} data={data} forceFit>
           <Coord transpose/>
           <Axis name="option" label={{offset: 5}}/>
@@ -94,6 +88,13 @@ class ChartPage extends Component {
           <Tooltip/>
           <Geom type="interval" position="option*votes" color={'#9c27b0'}/>
         </Chart>
+
+        <Chip
+          icon={<FaceIcon/>}
+          label={totalVotesMessage}
+          className={classes.chip}
+        />
+
       </Container>
     );
   }

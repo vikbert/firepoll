@@ -1,37 +1,19 @@
 import React, {Component} from 'react';
-import AnswerOption from "./AnswerOption";
 import {base, endpoints} from "../../firebase/base";
+import AnswerOption from "./AnswerOption";
 import AnswerOptionInput from "./AnswerOptionInput";
 import QuestionInput from './QuestionInput';
 
 import {withStyles} from '@material-ui/styles';
 import List from '@material-ui/core/List';
 import Container from '@material-ui/core/Container';
-import Fab from '@material-ui/core/Fab';
-import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import Typography from '@material-ui/core/Typography';
+import SubmitButton from "./SubmitButton";
 
-const styles = theme => ({
-  root: {
-    width: '100%',
-    marginTop: 20,
-    backgroundColor: theme.palette.background.paper,
-  },
-  card: {
-    marginTop: 15,
-    cursor: null,
-    "&:hover": {
-      backgroundColor: 'transparent',
-    },
-  },
-  media: {
-    height: 14,
-    padding: 14,
-    backgroundColor: "grey",
-    color: '#ffffff',
-  },
-  extendedIcon: {
-    marginRight: theme.spacing(1),
-  },
+const styles = () => ({
+  root: {}
 });
 
 class PollPage extends Component {
@@ -106,9 +88,21 @@ class PollPage extends Component {
     const {question} = this.state;
     const keys = Object.keys(question.options);
     const hasMinTwoAnswerOptions = keys.length >= 2;
+
     return (
       <div>
         <Container className={'container'} maxWidth="sm">
+
+          <Box>
+            <Typography component={'p'} align={'center'} style={{color: '#b7b7b7', margin: '1.5em'}}>
+              Add the poll question and min. 2x poll answers, then share the URL for getting feedback.
+              Each participant is able to vote the poll just once.
+            </Typography>
+          </Box>
+          <Box display={'flex'} justifyContent={'center'}>
+            <AssignmentIcon color={'disabled'} style={{fontSize: 80, display: 'block'}}/>
+          </Box>
+
           <QuestionInput handleSubmit={this.handleChangeQuestion} labelText={'Poll Question'}/>
           <AnswerOptionInput addAnswer={this.addAnswer}/>
           <List dense={false}>
@@ -122,19 +116,7 @@ class PollPage extends Component {
             ))}
           </List>
 
-          {hasMinTwoAnswerOptions > 0 &&
-          <Grid container direction={'row'} justify={'flex-end'} alignItems={'center'}>
-            <Fab
-              size={'large'}
-              variant={'extended'}
-              color={"primary"}
-              aria-label="save the question"
-              onClick={this.handleSubmit}
-            >
-              Submit Poll
-            </Fab>
-          </Grid>
-          }
+          {hasMinTwoAnswerOptions > 0 && <SubmitButton submit={this.handleSubmit}/>}
           {this.state.questionKey && <h3>{this.state.questionKey}</h3>}
         </Container>
       </div>

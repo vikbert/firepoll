@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import AccountIcon from '@material-ui/icons/AccountCircle';
 import {NavLink} from 'react-router-dom';
+import {useTheme} from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const styles = {
   root: {
@@ -26,6 +28,8 @@ const styles = {
 
 function PollAppBar(props) {
   const {classes} = props;
+  const theme = useTheme();
+  const matchedNormalScreen = useMediaQuery(theme.breakpoints.up('sm'));
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -37,7 +41,7 @@ function PollAppBar(props) {
           </nav>
 
           <Typography variant="h4" color="inherit" className={classes.grow} align={'center'}>
-            {'fp'}
+            {matchedNormalScreen ? 'FirePoll' : 'fp'}
           </Typography>
           <IconButton color="inherit" target="_blank" href="https://github.com/vikbert">
             <AccountIcon/>

@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/styles';
 import TextField from "@material-ui/core/TextField/TextField";
 import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
 import CheckIcon from '@material-ui/icons/Check';
-
+import AddIcon from '@material-ui/icons/Add';
 import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
@@ -37,6 +36,11 @@ const QuestionInput = ({classes, labelText, placeholderText, handleSubmit}) => {
     const inputValue = e.target.value;
     setTextInput(inputValue);
     setTextInputIsEmpty(false);
+    setIsSaved(false);
+  };
+
+  const handleBlurOption = () => {
+    applySubmit();
   };
 
   const handleKeyPress = (e) => {
@@ -68,6 +72,7 @@ const QuestionInput = ({classes, labelText, placeholderText, handleSubmit}) => {
             margin="normal"
             InputLabelProps={{shrink: true}}
             value={textInput}
+            onBlur={handleBlurOption}
             onChange={handleChangeOption}
             onKeyPress={handleKeyPress}
           />

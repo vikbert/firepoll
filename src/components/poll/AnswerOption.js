@@ -4,14 +4,16 @@ import PropTypes from 'prop-types';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from '@material-ui/icons/DeleteOutlined';
 
 import {withStyles} from '@material-ui/styles';
 
-const styles = theme => ({
+const styles = () => ({
   optionItem: {
-    padding: 0,
+    paddingTop: 5,
+    paddingBottom: 5,
     color: 'grey',
+    cursor: 'pointer'
   },
 });
 

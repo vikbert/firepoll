@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {base, endpoints} from "../../firebase/base";
 import './VotePage.css';
-import Option from './Option';
+import OptionButton from './OptionButton';
 import Container from '@material-ui/core/Container';
 import MySnackbarContentWrapper from '../common/SnackbarContentWrapper';
 import Typography from '@material-ui/core/Typography';
@@ -9,6 +9,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
 import {withStyles} from '@material-ui/styles';
+
 
 const styles = theme => ({
   extendedIcon: {
@@ -98,9 +99,7 @@ class VotePage extends Component {
 
   render() {
     const {question, selectedOption, isLoading, submitError} = this.state;
-    const {classes} = this.props;
     const optionKeys = question && Object.keys(question.options);
-    const shareLinkMessage = "share this link to get the voting from the others </br> " + window.location.href;
     return (
       <>
         <Container className={'container'} maxWidth={'sm'}>
@@ -126,11 +125,11 @@ class VotePage extends Component {
             <>
               <Typography variant={'subtitle1'}>Question: {question.text}</Typography>
               {optionKeys.map((key, index) => (
-                  <Option divName={selectedOption.optionId === key ? 'active option-item' : 'option-item'}
-                          key={index}
-                          optionId={key}
-                          optionText={question.options[key]}
-                          selectAnswer={this.handleClick}/>
+                  <OptionButton divName={selectedOption.optionId === key ? 'active option-item' : 'option-item'}
+                                key={index}
+                                optionId={key}
+                                optionText={question.options[key]}
+                                selectAnswer={this.handleClick}/>
                 ),
               )}
               {this.state.selectedOption &&
