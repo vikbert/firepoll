@@ -24,8 +24,8 @@ A realtime voting app with react.js + redux + firebase
     - vote ✔︎
     - chart ✔︎
 
-## Bugs
-- votePage: vote still possible, if no option selected 🔥
-- 
+## Bugs 🔥
+- votePage: vote still possible, if no option selected ✔︎
+
     
     

@@ -76,14 +76,6 @@ class ChartPage extends Component {
 
     const totalVotesMessage = votes.length + "x Votes";
 
-    console.log(data);
-    data = [
-      {option: 'some text ist there ', votes: 30},
-      {option: 'some tex there ', votes: 3},
-      {option: 'some tex ', votes: 12},
-      {option: 'some text ist there ', votes: 20},
-    ];
-
     return (
       <Container className={'container'} maxWidth={'sm'}>
 

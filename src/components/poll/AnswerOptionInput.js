@@ -31,8 +31,7 @@ const AnswerOptionInput = ({classes, addAnswer}) => {
   const [optionIsEmpty, setOptionIsEmpty] = useState(false);
 
   const handleChangeOption = (e) => {
-    const inputValue = e.target.value.trim();
-    setOptionInput(inputValue);
+    setOptionInput(e.target.value);
     setOptionIsEmpty(false);
   };
 
