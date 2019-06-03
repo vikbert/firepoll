@@ -9,7 +9,6 @@ import green from '@material-ui/core/colors/green';
 import IconButton from '@material-ui/core/IconButton';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
-import Grid from '@material-ui/core/Grid';
 import {withStyles} from '@material-ui/core/styles';
 
 const variantIcon = {
@@ -22,7 +21,7 @@ const variantIcon = {
 const styles = theme => ({
   success: {
     backgroundColor: green[600],
-    marginBottom: '20px'
+    marginBottom: '20px',
   },
   error: {
     backgroundColor: theme.palette.error.dark,
@@ -45,22 +44,22 @@ const MySnackbarContentWrapper = props => {
   const Icon = variantIcon[variant];
 
   return (
-      <SnackbarContent
-        className={clsx(classes[variant], classes.root, className)}
-        aria-describedby="client-snackbar"
-        message={
-          <span id="client-snackbar" className={classes.message}>
+    <SnackbarContent
+      className={clsx(classes[variant], classes.root, className)}
+      aria-describedby="client-snackbar"
+      message={
+        <span id="client-snackbar" className={classes.message}>
           <Icon className={clsx(classes.icon, classes.iconVariant)}/>
-            {message}
+          {message}
         </span>
-        }
-        action={[
-          <IconButton key="close" aria-label="Close" color="inherit" onClick={onClose}>
-            <CloseIcon className={classes.icon}/>
-          </IconButton>,
-        ]}
-        {...other}
-      />
+      }
+      action={[
+        <IconButton key="close" aria-label="Close" color="inherit" onClick={onClose}>
+          <CloseIcon className={classes.icon}/>
+        </IconButton>,
+      ]}
+      {...other}
+    />
   );
 };
 

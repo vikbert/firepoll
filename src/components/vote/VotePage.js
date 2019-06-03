@@ -151,7 +151,7 @@ class VotePage extends Component {
           <MySnackbarContentWrapper
             variant="success"
             open
-            message={'URL is copied to the clipboard!'}
+            message={'Link copied!'}
             onClose={this.handleCloseSnackbar}
           />
         )}
@@ -196,7 +196,7 @@ class VotePage extends Component {
                     color={'primary'}
                     arial-label={'save the selected answer'}
                   >
-                    Submit
+                    Next
                   </Fab>
                 </Grid>
                 }

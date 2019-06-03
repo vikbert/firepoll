@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
 import * as Storage from "../../firebase/base";
 import {base} from "../../firebase/base";
-import Container from '@material-ui/core/Container';
-import Chip from '@material-ui/core/Chip';
-import Grid from '@material-ui/core/Grid';
-
-import FaceIcon from '@material-ui/icons/Face';
 import {withStyles} from '@material-ui/styles';
 import {Axis, Chart, Coord, Geom, Tooltip} from 'bizcharts';
 import PollTitleCard from "../common/PollTitleCard";
-import Fab from "@material-ui/core/Fab/Fab";
-import copy from 'copy-to-clipboard';
 import InfoContainer from "../common/InfoContainer";
 import MySnackbarContentWrapper from "../common/SnackbarContentWrapper";
+import Container from '@material-ui/core/Container';
+import Chip from '@material-ui/core/Chip';
+import Grid from '@material-ui/core/Grid';
+import FaceIcon from '@material-ui/icons/Face';
+import Fab from "@material-ui/core/Fab/Fab";
+import copy from 'copy-to-clipboard';
 
 const styles = theme => ({
   chip: {
@@ -97,15 +96,6 @@ class ChartPage extends Component {
 
     return (
       <Container className={'container'} maxWidth={'sm'}>
-        {isCopied && (
-          <MySnackbarContentWrapper
-            variant="success"
-            open
-            message={'URL is copied to the clipboard!'}
-            onClose={this.handleClose}
-          />
-        )}
-
         {question && (
           <Grid className={'container'}>
             <PollTitleCard title={question.text}/>
@@ -114,7 +104,7 @@ class ChartPage extends Component {
               <Chip icon={<FaceIcon/>} label={totalVotesMessage} className={classes.chip}/>
             </Grid>
             }
-            <Chart height={400} data={data} forceFit>
+            <Chart height={300} data={data} forceFit>
               <Coord transpose/>
               <Axis name="option" label={{offset: 5}}/>
               <Axis name="votes"/>
@@ -124,7 +114,17 @@ class ChartPage extends Component {
           </Grid>
         )}
 
-        <Grid container justify={'center'}>
+        {isCopied && (
+          <MySnackbarContentWrapper
+            variant="success"
+            open
+            message={'Link copied!'}
+            onClose={this.handleClose}
+          />
+        )}
+
+
+        <Grid container justify={'center'} className={'container'}>
           <Fab
             onClick={this.handleCopy}
             size={'large'}
@@ -135,7 +135,7 @@ class ChartPage extends Component {
             Copy & Share
           </Fab>
         </Grid>
-        <InfoContainer info={'Copy and share this poll with your team.'}/>
+        <InfoContainer info={'Share the link to get more voting from your team.'}/>
 
       </Container>
     );
