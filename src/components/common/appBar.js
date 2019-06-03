@@ -6,7 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
-import AccountIcon from '@material-ui/icons/AccountCircle';
+import CodeIcon from '@material-ui/icons/Code';
 import {NavLink} from 'react-router-dom';
 import {useTheme} from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -43,8 +43,8 @@ function PollAppBar(props) {
           <Typography variant="h4" color="inherit" className={classes.grow} align={'center'}>
             {matchedNormalScreen ? 'FirePoll' : 'fp'}
           </Typography>
-          <IconButton color="inherit" target="_blank" href="https://github.com/vikbert">
-            <AccountIcon/>
+          <IconButton color="inherit" target="_blank" href="https://github.com/vikbert/firepoll">
+            <CodeIcon/>
           </IconButton>
         </Toolbar>
       </AppBar>

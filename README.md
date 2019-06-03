@@ -1,4 +1,4 @@
-# Schwarzpoll
+# FirePoll
 A realtime voting app with react.js + redux + firebase
 (🔥,✔︎)
 ## Anforderung
