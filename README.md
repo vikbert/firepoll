@@ -1,7 +1,7 @@
 # FirePoll
 A realtime voting app with react.js + redux + firebase
 
-![screenshot](./screenshot.png)
+<img src="./screenshot.png" width="300" />
 
 (🔥,✔︎)
 ## Anforderung
