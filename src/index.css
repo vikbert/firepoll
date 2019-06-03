@@ -3,3 +3,26 @@ body {
     font-family: "Lato", sans-serif;
     font-size: 16px;
 }
+.option-item {
+    cursor: pointer;
+    margin: 20px 0;
+    border: 1px solid #9c27b0;
+    padding: 15px 8px;
+}
+
+.option-item:hover {
+    background-color: grey;
+    border: 1px solid grey;
+    color: #ffffff;
+}
+.option-item.active {
+    background-color: #9c27b0;
+    color: #ffffff;
+}
+.icon-selected {
+    color: #ffffff;
+    padding-right: 8px;
+}
+.icon-selected:hover {
+    color: #e6f4f6;
+}

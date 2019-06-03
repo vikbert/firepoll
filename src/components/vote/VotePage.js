@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {base, endpoints} from "../../firebase/base";
-import './VotePage.css';
 import OptionButton from './OptionButton';
 import Container from '@material-ui/core/Container';
 import MySnackbarContentWrapper from '../common/SnackbarContentWrapper';
