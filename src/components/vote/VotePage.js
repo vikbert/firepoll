@@ -10,6 +10,7 @@ import Fab from '@material-ui/core/Fab';
 import {withStyles} from '@material-ui/styles';
 import PollTitleCard from "../common/PollTitleCard";
 import InfoContainer from "../common/InfoContainer";
+import copy from 'copy-to-clipboard';
 
 const styles = theme => ({
   extendedIcon: {
@@ -18,6 +19,9 @@ const styles = theme => ({
   },
   submitButtonRoot: {
     marginBottom: 10,
+  },
+  shareButton: {
+    backgroundColor: theme.palette.background.paper,
   },
 });
 
@@ -36,6 +40,7 @@ class VotePage extends Component {
   };
 
   uuidv4() {
+    /*eslint no-mixed-operators:*/
     return `${1e7}-${1e3}-${4e3}-${8e3}-${1e11}`.replace(/[018]/g, c =>
       (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16),
     );
@@ -117,6 +122,13 @@ class VotePage extends Component {
     this.setState({submitError: false});
   };
 
+  handleCopy = (e) => {
+    e.preventDefault();
+    const url = window.location.href;
+    copy(url);
+    console.log('copied', url);
+  };
+
   render() {
     const {question, selectedOption, isLoading, submitError} = this.state;
     const {classes} = this.props;
@@ -153,19 +165,33 @@ class VotePage extends Component {
                                 selectAnswer={this.handleClick}/>
                 ),
               )}
-              {this.state.selectedOption &&
-              <Grid container direction={'row'} justify={'flex-end'} className={classes.submitButtonRoot}>
-                <Fab
-                  onClick={this.handleSubmit}
-                  size={'large'}
-                  variant={'extended'}
-                  color={'primary'}
-                  arial-label={'save the selected answer'}
-                >
-                  Submit Vote
-                </Fab>
+
+              <Grid container direction={'row'}>
+                <Grid item xs={6} container justify={'flex-start'} className={classes.shareButton}>
+                  <Fab
+                    onClick={this.handleCopy}
+                    size={'large'}
+                    variant={'extended'}
+                    arial-label={'Copy and share'}
+                  >
+                    Copy & Share
+                  </Fab>
+                </Grid>
+                {this.state.selectedOption &&
+                <Grid item xs={6} container justify={'flex-end'} className={classes.submitButtonRoot}>
+                  <Fab
+                    onClick={this.handleSubmit}
+                    size={'large'}
+                    variant={'extended'}
+                    color={'primary'}
+                    arial-label={'save the selected answer'}
+                  >
+                    Submit Vote
+                  </Fab>
+                </Grid>
+                }
               </Grid>
-              }
+
             </>
           )}
           <InfoContainer info={'Choose one question and submit your vote'}/>

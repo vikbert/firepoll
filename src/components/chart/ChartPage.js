@@ -3,10 +3,14 @@ import * as Storage from "../../firebase/base";
 import {base} from "../../firebase/base";
 import Container from '@material-ui/core/Container';
 import Chip from '@material-ui/core/Chip';
+import Grid from '@material-ui/core/Grid';
+
 import FaceIcon from '@material-ui/icons/Face';
 import {withStyles} from '@material-ui/styles';
 import {Axis, Chart, Coord, Geom, Tooltip} from 'bizcharts';
 import PollTitleCard from "../common/PollTitleCard";
+import Fab from "@material-ui/core/Fab/Fab";
+import copy from 'copy-to-clipboard';
 
 const styles = theme => ({
   chip: {
@@ -29,7 +33,6 @@ class ChartPage extends Component {
       context: this,
       asArray: false,
     }).then(data => {
-      console.log('data is back');
       this.setState({question: data});
     }).catch(error => {
       console.error(error);
@@ -45,6 +48,12 @@ class ChartPage extends Component {
 
   componentWillUnmount() {
     base.removeBinding(this.votesRef);
+  }
+
+  handleCopy = (e) => {
+      e.preventDefault();
+      const url = window.location.href;
+      copy(url.replace('chart', 'vote'));
   }
 
   render() {
@@ -89,11 +98,28 @@ class ChartPage extends Component {
           <Geom type="interval" position="option*votes" color={'#9c27b0'}/>
         </Chart>
 
-        <Chip
-          icon={<FaceIcon/>}
-          label={totalVotesMessage}
-          className={classes.chip}
-        />
+
+        <Grid container direction={'row'}>
+          <Grid item xs={6} container justify={'flex-start'} className={classes.shareButton}>
+            <Chip
+              icon={<FaceIcon/>}
+              label={totalVotesMessage}
+              className={classes.chip}
+            />
+
+          </Grid>
+          <Grid item xs={6} container justify={'flex-end'}>
+            <Fab
+              onClick={this.handleCopy}
+              size={'large'}
+              variant={'extended'}
+              color={'primary'}
+              arial-label={'Copy and share'}
+            >
+              Copy & Share
+            </Fab>
+          </Grid>
+        </Grid>
 
       </Container>
     );
