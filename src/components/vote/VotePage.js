@@ -36,6 +36,7 @@ class VotePage extends Component {
     submitError: undefined,
     selectedOption: {},
     isLoading: true,
+    isCopied: false,
   };
 
   uuidv4() {
@@ -118,33 +119,43 @@ class VotePage extends Component {
   };
 
   handleCloseSnackbar = () => {
-    this.setState({submitError: false});
+    this.setState({
+      submitError: false,
+      isCopied: false,
+    });
   };
 
   handleCopy = (e) => {
     e.preventDefault();
     const url = window.location.href;
     copy(url);
-    console.log('copied', url);
+    this.setState({isCopied: true})
   };
 
   render() {
-    const {question, selectedOption, isLoading, submitError} = this.state;
+    const {question, selectedOption, isLoading, submitError, isCopied} = this.state;
     const {classes} = this.props;
     const optionKeys = question && Object.keys(question.options);
+
     return (
-      <>
-        <Container className={'container'} maxWidth={'sm'}>
-          {submitError && (
+      <Container className={'container'} maxWidth={'sm'}>
+        {submitError && (
             <MySnackbarContentWrapper
               variant="error"
               open
               message={submitError}
               onClose={this.handleCloseSnackbar}
             />
-          )}
-        </Container>
-        <Container className={'container'} maxWidth={'sm'}>
+        )}
+        { isCopied && (
+          <MySnackbarContentWrapper
+            variant="success"
+            open
+            message={'URL is copied to the clipboard!'}
+            onClose={this.handleCloseSnackbar}
+          />
+        )}
+        <Grid className={'container'}>
           {isLoading
           && (
             <Grid container justify="center">
@@ -185,18 +196,16 @@ class VotePage extends Component {
                     color={'primary'}
                     arial-label={'save the selected answer'}
                   >
-                    Submit Vote
+                    Submit
                   </Fab>
                 </Grid>
                 }
               </Grid>
-
             </>
           )}
           <InfoContainer info={'Choose one question and submit your vote'}/>
-
-        </Container>
-      </>
+        </Grid>
+      </Container>
     );
   }
 }

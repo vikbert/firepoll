@@ -19,6 +19,9 @@ const variantIcon = {
 };
 
 const styles = theme => ({
+  variant: {
+    width: '100%'
+  },
   success: {
     backgroundColor: green[600],
   },
@@ -39,8 +42,7 @@ const styles = theme => ({
 });
 
 const MySnackbarContentWrapper = props => {
-  const {classes} = props;
-  const {className, message, onClose, variant, ...other} = props;
+  const {className, classes, message, onClose, variant, ...other} = props;
   const Icon = variantIcon[variant];
 
   return (

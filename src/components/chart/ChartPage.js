@@ -11,6 +11,7 @@ import {Axis, Chart, Coord, Geom, Tooltip} from 'bizcharts';
 import PollTitleCard from "../common/PollTitleCard";
 import Fab from "@material-ui/core/Fab/Fab";
 import copy from 'copy-to-clipboard';
+import InfoContainer from "../common/InfoContainer";
 
 const styles = theme => ({
   chip: {
@@ -22,7 +23,7 @@ class ChartPage extends Component {
   state = {
     questionKey: undefined,
     votes: {},
-    question: {},
+    question: undefined,
   };
 
   componentDidMount() {
@@ -51,10 +52,10 @@ class ChartPage extends Component {
   }
 
   handleCopy = (e) => {
-      e.preventDefault();
-      const url = window.location.href;
-      copy(url.replace('chart', 'vote'));
-  }
+    e.preventDefault();
+    const url = window.location.href;
+    copy(url.replace('chart', 'vote'));
+  };
 
   render() {
     const {votes, question} = this.state;
@@ -84,42 +85,41 @@ class ChartPage extends Component {
     });
 
     const totalVotesMessage = votes.length + "x Votes";
+    console.log(question);
 
     return (
       <Container className={'container'} maxWidth={'sm'}>
-
-        <PollTitleCard title={question.text}/>
-
-        <Chart height={400} data={data} forceFit>
-          <Coord transpose/>
-          <Axis name="option" label={{offset: 5}}/>
-          <Axis name="votes"/>
-          <Tooltip/>
-          <Geom type="interval" position="option*votes" color={'#9c27b0'}/>
-        </Chart>
-
-
-        <Grid container direction={'row'}>
-          <Grid item xs={6} container justify={'flex-start'} className={classes.shareButton}>
-            <Chip
-              icon={<FaceIcon/>}
-              label={totalVotesMessage}
-              className={classes.chip}
-            />
-
+        {question &&
+        <>
+          <PollTitleCard title={question.text}/>
+          {votes.length !== undefined &&
+          <Grid container direction={'row'} justify={'flex-end'}>
+            <Chip icon={<FaceIcon/>} label={totalVotesMessage} className={classes.chip}/>
           </Grid>
-          <Grid item xs={6} container justify={'flex-end'}>
-            <Fab
-              onClick={this.handleCopy}
-              size={'large'}
-              variant={'extended'}
-              color={'primary'}
-              arial-label={'Copy and share'}
-            >
-              Copy & Share
-            </Fab>
-          </Grid>
+          }
+          <Chart height={400} data={data} forceFit>
+            <Coord transpose/>
+            <Axis name="option" label={{offset: 5}}/>
+            <Axis name="votes"/>
+            <Tooltip/>
+            <Geom type="interval" position="option*votes" color={'#9c27b0'}/>
+          </Chart>
+        </>
+        }
+
+        <Grid container justify={'center'}>
+          <Fab
+            onClick={this.handleCopy}
+            size={'large'}
+            variant={'extended'}
+            color={'primary'}
+            arial-label={'Copy and share'}
+          >
+            Copy & Share
+          </Fab>
         </Grid>
+
+        <InfoContainer info={'Copy and share this poll with your team.'}/>
 
       </Container>
     );

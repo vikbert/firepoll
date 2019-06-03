@@ -22,7 +22,7 @@ const SubmitButton = ({classes, handleSubmit}) => {
           aria-label="save the question"
           onClick={handleSubmit}
         >
-          Submit Poll
+          Submit
         </Fab>
       </Grid>
     </div>
