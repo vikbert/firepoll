@@ -6,6 +6,9 @@ import Avatar from "@material-ui/core/Avatar/Avatar";
 import Card from "@material-ui/core/Card/Card";
 
 const styles = () => ({
+  root: {
+    marginTop: '20'
+  },
   title: {
     color: '#5d5959',
   },
@@ -18,7 +21,7 @@ const PollTitle = props => {
   const {title, classes} = props;
   const headerAvatar = <Avatar aria-label="Recipe" className={classes.avatar}>Q</Avatar>;
   return (
-    <Card>
+    <Card className={classes.root}>
       <CardHeader avatar={headerAvatar} title={title}/>
     </Card>
   );

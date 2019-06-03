@@ -12,6 +12,7 @@ import PollTitleCard from "../common/PollTitleCard";
 import Fab from "@material-ui/core/Fab/Fab";
 import copy from 'copy-to-clipboard';
 import InfoContainer from "../common/InfoContainer";
+import MySnackbarContentWrapper from "../common/SnackbarContentWrapper";
 
 const styles = theme => ({
   chip: {
@@ -24,6 +25,7 @@ class ChartPage extends Component {
     questionKey: undefined,
     votes: {},
     question: undefined,
+    isCopied: false,
   };
 
   componentDidMount() {
@@ -55,10 +57,17 @@ class ChartPage extends Component {
     e.preventDefault();
     const url = window.location.href;
     copy(url.replace('chart', 'vote'));
+    this.setState({isCopied: true});
+  };
+
+  handleClose = () => {
+    this.setState({
+      isCopied: false,
+    });
   };
 
   render() {
-    const {votes, question} = this.state;
+    const {votes, question, isCopied} = this.state;
     const {classes} = this.props;
 
     const barData = {};
@@ -85,27 +94,35 @@ class ChartPage extends Component {
     });
 
     const totalVotesMessage = votes.length + "x Votes";
-    console.log(question);
 
     return (
       <Container className={'container'} maxWidth={'sm'}>
-        {question &&
-        <>
-          <PollTitleCard title={question.text}/>
-          {votes.length !== undefined &&
-          <Grid container direction={'row'} justify={'flex-end'}>
-            <Chip icon={<FaceIcon/>} label={totalVotesMessage} className={classes.chip}/>
+        {isCopied && (
+          <MySnackbarContentWrapper
+            variant="success"
+            open
+            message={'URL is copied to the clipboard!'}
+            onClose={this.handleClose}
+          />
+        )}
+
+        {question && (
+          <Grid className={'container'}>
+            <PollTitleCard title={question.text}/>
+            {votes.length !== undefined &&
+            <Grid container direction={'row'} justify={'flex-end'}>
+              <Chip icon={<FaceIcon/>} label={totalVotesMessage} className={classes.chip}/>
+            </Grid>
+            }
+            <Chart height={400} data={data} forceFit>
+              <Coord transpose/>
+              <Axis name="option" label={{offset: 5}}/>
+              <Axis name="votes"/>
+              <Tooltip/>
+              <Geom type="interval" position="option*votes" color={'#9c27b0'}/>
+            </Chart>
           </Grid>
-          }
-          <Chart height={400} data={data} forceFit>
-            <Coord transpose/>
-            <Axis name="option" label={{offset: 5}}/>
-            <Axis name="votes"/>
-            <Tooltip/>
-            <Geom type="interval" position="option*votes" color={'#9c27b0'}/>
-          </Chart>
-        </>
-        }
+        )}
 
         <Grid container justify={'center'}>
           <Fab
@@ -118,7 +135,6 @@ class ChartPage extends Component {
             Copy & Share
           </Fab>
         </Grid>
-
         <InfoContainer info={'Copy and share this poll with your team.'}/>
 
       </Container>
