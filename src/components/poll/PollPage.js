@@ -9,7 +9,6 @@ import List from '@material-ui/core/List';
 import Container from '@material-ui/core/Container';
 import SubmitButton from "./SubmitButton";
 import InfoContainer from "../common/InfoContainer";
-import PollPreview from "./pollPreview";
 
 const styles = () => ({
   root: {},
