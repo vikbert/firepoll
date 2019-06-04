@@ -4,10 +4,12 @@ A realtime voting app with react.js + redux + firebase
 <img src="./screenshot.png" width="300" />
 
 (🔥,✔︎)
-## Anforderung
+## Requirement for MVP
  1. Question Form Page
  2. Vote Form page
  3. Chart Page(real time)
+ 4. Chart should be reactive and realtime
+ 5. necessary error handling
 
 ## Todos
 - use State Manager: Redux 🔥
