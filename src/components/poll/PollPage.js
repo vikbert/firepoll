@@ -97,7 +97,6 @@ class PollPage extends Component {
           )}
 
           <QuestionInput handleSubmit={this.handleChangeQuestion} labelText={'Poll Question'}/>
-
           <AnswerOptionInput addAnswer={this.addAnswer}/>
           <List dense={false}>
             {keys.map((key, index) => (
