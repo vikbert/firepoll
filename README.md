@@ -10,6 +10,9 @@ A realtime voting app with react.js + redux + firebase
  3. Chart Page(real time)
 
 ## Todos
+- use State Manager: Redux 🔥
+- add unit tests 🔥
+
 - create pages
     - install router ✔︎
     - integrate router dom in app and create pages ✔︎
@@ -27,7 +30,7 @@ A realtime voting app with react.js + redux + firebase
     - vote ✔︎
     - chart ✔︎
 
-## Bugs 🔥
+## Bugs
 - votePage: vote still possible, if no option selected ✔︎
 
     
