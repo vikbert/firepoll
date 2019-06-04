@@ -9,6 +9,7 @@ import List from '@material-ui/core/List';
 import Container from '@material-ui/core/Container';
 import SubmitButton from "./SubmitButton";
 import InfoContainer from "../common/InfoContainer";
+import PollPreview from "./pollPreview";
 
 const styles = () => ({
   root: {},
@@ -97,7 +98,6 @@ class PollPage extends Component {
           )}
 
           <QuestionInput handleSubmit={this.handleChangeQuestion} labelText={'Poll Question'}/>
-
           <AnswerOptionInput addAnswer={this.addAnswer}/>
           <List dense={false}>
             {keys.map((key, index) => (
