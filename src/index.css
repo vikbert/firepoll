@@ -6,7 +6,7 @@ body {
 .option-item {
     cursor: pointer;
     margin: 20px 0;
-    border: 1px solid #9c27b0;
+    border: 1px solid #7b2182;
     padding: 15px 8px;
 }
 
@@ -16,7 +16,7 @@ body {
     color: #ffffff;
 }
 .option-item.active {
-    background-color: #9c27b0;
+    background-color: #7b2182;
     color: #ffffff;
 }
 .icon-selected {

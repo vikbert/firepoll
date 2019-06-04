@@ -67,7 +67,7 @@ class ChartPage extends Component {
 
   render() {
     const {votes, question, isCopied} = this.state;
-    const {classes} = this.props;
+    const {classes, theme} = this.props;
 
     const barData = {};
     if (question && question.options) {
@@ -109,7 +109,7 @@ class ChartPage extends Component {
               <Axis name="option" label={{offset: 5}}/>
               <Axis name="votes"/>
               <Tooltip/>
-              <Geom type="interval" position="option*votes" color={'#9c27b0'}/>
+              <Geom type="interval" position="option*votes" color={theme.palette.primary.main}/>
             </Chart>
           </Grid>
         )}

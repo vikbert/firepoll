@@ -7,9 +7,8 @@ import {BrowserRouter} from 'react-router-dom';
 import PollAppBar from "./components/common/appBar";
 import {createMuiTheme} from '@material-ui/core/styles';
 import {ThemeProvider} from '@material-ui/styles';
-import purple from '@material-ui/core/colors/purple';
 
-const primaryPurple = purple[500];
+const primaryPurple = '#7b2182';
 const theme = createMuiTheme({
     palette: {
       primary: {
