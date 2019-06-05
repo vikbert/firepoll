@@ -7,7 +7,7 @@ A real-time responsive voting app with react.js + redux + firebase, UX powered b
 create a new project on FireBase and get the API credential to establish the connection with firebase.
 
 
-If you have no experience with `firebase`, please read [here](https://firebase.google
+If you have no experience with `firebase`, please read [here](https://firebase.google.com/docs/web/setup)
 
 ### Installing
 
