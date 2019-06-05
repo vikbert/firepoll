@@ -13,6 +13,7 @@ If you have no experience with `firebase`, please read [here](https://firebase.g
 
 To run the app locally, the following credentials need to be added to `.env`
 ```bash
+## rename .env.dist to .env, then add the credential which you got from firebase console.
 REACT_APP_FIREBASE_KEY=""
 REACT_APP_FIREBASE_DOMAIN=""
 REACT_APP_FIREBASE_DATABASE=""
