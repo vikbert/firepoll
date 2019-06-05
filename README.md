@@ -24,7 +24,7 @@ If you have no experience with `firebase`, please read [here](https://firebase.g
 
 ## Deployment
 
-The live demo is hosted with free service on [netlify.com](https://www.netlify.com/)
+The live demo is hosted with free service on [netlify.com](https://www.netlify.com)
 
 ## Todos (🔥 open, ✔ ︎done)
 - use State Manager: Redux 🔥
