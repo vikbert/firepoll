@@ -1,17 +1,11 @@
 # FirePoll
-A realtime voting app with react.js + redux + firebase
+A real-time responsive voting app with react.js + redux + firebase, UX powered by React Material UI.
 
-<img src="./screenshot.png" width="300" />
+<img src="./header.png"/>
 
-(🔥,✔︎)
-## Requirement for MVP
- 1. Question Form Page
- 2. Vote Form page
- 3. Chart Page(real time)
- 4. Chart should be reactive and realtime
- 5. necessary error handling
 
-## Todos
+
+## Todos (🔥 open, ✔ ︎done)
 - use State Manager: Redux 🔥
 - add unit tests 🔥
 
