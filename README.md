@@ -26,10 +26,6 @@ If you have no experience with `firebase`, please read [here](https://firebase.g
 
 The live demo is hosted with free service on [netlify.com](https://www.netlify.com/)
 
-
-## License
-MIT
-
 ## Todos (🔥 open, ✔ ︎done)
 - use State Manager: Redux 🔥
 - add unit tests 🔥
@@ -56,3 +52,7 @@ MIT
 
     
     
+
+
+## License
+MIT
