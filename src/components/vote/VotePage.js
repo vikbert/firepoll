@@ -151,7 +151,7 @@ class VotePage extends Component {
           <MySnackbarContentWrapper
             variant="success"
             open
-            message={'Link copied!'}
+            message={'Link for this poll copied!'}
             onClose={this.handleCloseSnackbar}
           />
         )}
@@ -184,7 +184,7 @@ class VotePage extends Component {
                     variant={'extended'}
                     arial-label={'Copy and share'}
                   >
-                    Copy & Share
+                    Share this poll
                   </Fab>
                 </Grid>
                 {this.state.selectedOption &&

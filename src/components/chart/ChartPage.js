@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
-import * as Storage from "../../firebase/base";
-import {base} from "../../firebase/base";
+import * as Storage from '../../firebase/base';
+import {base} from '../../firebase/base';
 import {withStyles} from '@material-ui/styles';
 import {Axis, Chart, Coord, Geom, Tooltip} from 'bizcharts';
-import PollTitleCard from "../common/PollTitleCard";
-import InfoContainer from "../common/InfoContainer";
-import MySnackbarContentWrapper from "../common/SnackbarContentWrapper";
+import PollTitleCard from '../common/PollTitleCard';
+import InfoContainer from '../common/InfoContainer';
+import MySnackbarContentWrapper from '../common/SnackbarContentWrapper';
 import Container from '@material-ui/core/Container';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import FaceIcon from '@material-ui/icons/Face';
-import Fab from "@material-ui/core/Fab/Fab";
+import Fab from '@material-ui/core/Fab/Fab';
 import copy from 'copy-to-clipboard';
 
 const styles = theme => ({
@@ -25,6 +25,7 @@ class ChartPage extends Component {
     votes: {},
     question: undefined,
     isCopied: false,
+    success: 'Link for this chart copied!',
   };
 
   componentDidMount() {
@@ -43,7 +44,7 @@ class ChartPage extends Component {
     const votesEndpoint = `${Storage.endpoints.votes}/${slug}`;
     this.votesRef = Storage.base.syncState(votesEndpoint, {
       context: this,
-      state: "votes",
+      state: 'votes',
       asArray: true,
     });
   }
@@ -52,10 +53,16 @@ class ChartPage extends Component {
     base.removeBinding(this.votesRef);
   }
 
-  handleCopy = (e) => {
+  handleCopy = (e, type = 'vote') => {
     e.preventDefault();
-    const url = window.location.href;
-    copy(url.replace('chart', 'vote'));
+    let url = window.location.href;
+    if (type === 'vote') {
+      url = url.replace('chart', 'vote')
+      this.setState({success: 'Link for this vote copied!'})
+    } else {
+      this.setState({success: 'Link for this chart copied!'})
+    }
+    copy(url);
     this.setState({isCopied: true});
   };
 
@@ -92,7 +99,7 @@ class ChartPage extends Component {
       return true;
     });
 
-    const totalVotesMessage = votes.length + "x Votes";
+    const totalVotesMessage = votes.length + 'x Votes';
 
     return (
       <Container className={'container'} maxWidth={'sm'}>
@@ -118,22 +125,37 @@ class ChartPage extends Component {
           <MySnackbarContentWrapper
             variant="success"
             open
-            message={'Link copied!'}
+            message={this.state.success}
             onClose={this.handleClose}
           />
         )}
 
-
-        <Grid container justify={'center'} className={'container'}>
-          <Fab
-            onClick={this.handleCopy}
-            size={'large'}
-            variant={'extended'}
-            color={'primary'}
-            arial-label={'Copy and share'}
-          >
-            Copy & Share
-          </Fab>
+        <Grid
+          container
+          className={'container'}
+          justify={'space-evenly'}
+        >
+          <Grid item>
+            <Fab
+              onClick={(event, type) => this.handleCopy(event, 'vote')}
+              size={'large'}
+              variant={'extended'}
+              arial-label={'Share this poll'}
+            >
+              Share this poll
+            </Fab>
+          </Grid>
+          <Grid item>
+            <Fab
+              onClick={(event, type) => this.handleCopy(event, 'chart')}
+              size={'large'}
+              variant={'extended'}
+              color={'primary'}
+              arial-label={'Share this chart'}
+            >
+              Share this chart
+            </Fab>
+          </Grid>
         </Grid>
         <InfoContainer info={'Share the link to get more voting from your team.'}/>
 
