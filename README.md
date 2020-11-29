@@ -1,5 +1,32 @@
-# FirePoll
-A real-time responsive voting app with react.js + redux + firebase, UX powered by React Material UI.
+<div align="center">
+  <!-- Logo and title and sub-title -->
+  <img src="https://seeklogo.com/images/R/react-logo-7B3CE81517-seeklogo.com.png" alt="logo" width="80"/>
+  <h1 style="font-weight: bolder; color: black; margin-top: 0px">FirePoll</h1>
+  <h3 style="color: darkgrey; margin: 40px 0"> 
+    A realtime Voting App based on firebase
+  </h3>
+
+  <!-- description of project -->
+  <p>
+    Polling App based on ReactJS + Redux + Firebase for the realtime voting. UX based on React Material UI.
+  </p>
+
+  <!-- github icons for PR and License -->
+  <p>
+    <a href="#">
+      <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome">
+    </a>
+    <a href="#">
+      <img src="https://img.shields.io/badge/License-MIT-brightgreen.svg?style=flat-square" alt="MIT License">
+    </a>
+  </p>
+</div>
+
+---
+
+## Screenshots
+
+A real-time responsive voting app with 
 
 <img src="./header.png"/>
 
@@ -27,7 +54,6 @@ If you have no experience with `firebase`, please read [here](https://firebase.g
     yarn install
     yarn start
     
-+
 ## Deployment
 
 The live demo is hosted with free service on [netlify.com](https://www.netlify.com)
@@ -35,9 +61,6 @@ The live demo is hosted with free service on [netlify.com](https://www.netlify.c
 
 ## Bugs
 - votePage: vote still possible, if no option selected ✔︎
-
-    
-    
 
 
 ## License
